@@ -150,7 +150,8 @@ public class Computador {
         }
     }
 
-    public void incluir() {
+    public void addComp() {
+        char confirmation;
         do {
             System.out.print("Inserir marca: ");
             marca = Main.readKB.next();
@@ -220,6 +221,14 @@ public class Computador {
             codComp = generateCodComp("IB");
         }
 
+        System.out.println("\nConfirma a gravacao dos dados (S/N)?");
+        confirmation = Main.readKB.next().charAt(0);
+        if (confirmation == 'S') {
+            saveComputer();
+            System.out.println("Dados salvos com sucesso.");
+        } else {
+            System.out.println("Dados nao foram salvos. Se desejar, repita a operacao.");
+        }
     }
 
     public String generateCodComp (String compBrand) {
@@ -241,5 +250,106 @@ public class Computador {
             }
         }
         return temp;
+    }
+
+    public void alterData () {
+        String computerKey;
+        char confirmation;
+        long regPos = 0;
+        byte option;
+        String tempStr;
+        int tempInt;
+        float tempFlo;
+
+        System.out.println("Digite o registro que deseja alterar: ");
+        computerKey = Main.readKB.next();
+
+        regPos = searchComputer(computerKey);
+
+        if (regPos == -1) {
+            System.out.println("Registro nao encontrado.");
+        } else {
+            ativo = 'S';
+
+            do {
+                System.out.println("[1] Marca..................: " + marca);
+                System.out.println("[2] Modelo.................: " + modelo);
+                System.out.println("[3] Processador............: " + processador);
+                System.out.println("[4] Memoria................: " + quantMemoria + "gb");
+                System.out.println("[5] Tamanho da Tela........: " + tamanhoTela);
+                System.out.println("[6] Quantidade em estoque..: " + quantEstoque);
+                System.out.println("[7] Preco..................: " + preco);
+
+                System.out.println("Digite o numero do campo que deseja alterar (0 para finalizar): ");
+                option = Main.readKB.nextByte();
+
+                switch (option) {
+                    case 1 -> {
+                        do {
+                            Main.readKB.nextLine();
+                            System.out.println("Digite a nova marca: ");
+                            tempStr = Main.readKB.next();
+                        } while (!consistirMarca(tempStr));
+                        marca = tempStr;
+                    }
+                    case 2 -> {
+                        Main.readKB.nextLine();
+                        System.out.println("Digite o novo modelo: ");
+                        modelo = Main.readKB.nextLine();
+                    }
+                    case 3 -> {
+                        do {
+                            Main.readKB.nextLine();
+                            System.out.println("Digite o novo processador: ");
+                            tempStr = Main.readKB.next();
+                        } while (!consistirProcessador(tempStr));
+                        processador = tempStr;
+                    }
+                    case 4 -> {
+                        do {
+                            Main.readKB.nextLine();
+                            System.out.println("Digite a nova quantidade de memoria: ");
+                            tempInt = Main.readKB.nextInt();
+                        } while (tempInt < 1 || tempInt > 16);
+                        quantMemoria = tempInt;
+                    }
+                    case 5 -> {
+                        do {
+                            Main.readKB.nextLine();
+                            System.out.println("Digite o novo tamanho de tela: ");
+                            tempInt = Main.readKB.nextInt();
+                        } while (!consistirTamanhoTela(tempInt));
+                        tamanhoTela = tempInt;
+                    }
+                    case 6 -> {
+                        do {
+                            Main.readKB.nextLine();
+                            System.out.println("Digite a nova quantidade em estoque: ");
+                            tempInt = Main.readKB.nextInt();
+                        } while (tempInt < 0);
+                        quantEstoque = tempInt;
+                    }
+                    case 7 -> {
+                        do {
+                            Main.readKB.nextLine();
+                            System.out.println("Digite o novo preco: ");
+                            tempFlo = Main.readKB.nextFloat();
+                        } while (tempFlo < 1000 || tempFlo > 20000);
+                        preco = tempFlo;
+                    }
+                    default -> System.out.println("Opcao invalida.");
+                }
+            } while (option != 0);
+
+            System.out.println("\nConfirma a alteracao dos dados (S/N)?");
+            confirmation = Main.readKB.next().charAt(0);
+            if (confirmation == 'S') {
+                deactivateComputer(regPos);
+                saveComputer();
+                System.out.println("Dados alterados com sucesso!");
+            } else {
+                System.out.println("Alteracao descartada.");
+            }
+        }
     }
 }
