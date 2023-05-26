@@ -5,45 +5,45 @@ import java.io.IOException;
 import java.io.RandomAccessFile;
 
 public class Computador {
-    private String[] marcas = {"Dell", "Lenovo", "HP", "Positivo", "Asus", "Apple", "IBM"};
-    private String[] processadores = {"Intel Core i3", "Intel Core i5", "Intel Core i7",
+    private String[] brandsList = {"Dell", "Lenovo", "HP", "Positivo", "Asus", "Apple", "IBM"};
+    private String[] processorsList = {"Intel Core i3", "Intel Core i5", "Intel Core i7",
                                      "Intel Core i9", "AMD Ryzen", "AMD Athlon"};
-    private int[] tamanhoTelas = {10, 12, 15, 20, 25, 28};
+    private int[] screenSizeList = {10, 12, 15, 20, 25, 28};
 
 
-    private char ativo;
+    private char active;
     private String codComp;
-    private String marca;
-    private String modelo;
-    private String processador;
-    private int quantMemoria;
-    private int tamanhoTela;
-    private int quantEstoque;
-    private float preco;
-    private int quantVendida;
-    private String dtUltimaVenda;
+    private String brand;
+    private String model;
+    private String processor;
+    private int memorySize;
+    private int screenSize;
+    private int amountInStock;
+    private float price;
+    private int totalSold;
+    private String dtLastSale;
 
-    private boolean consistirMarca(String marcaCheck) {
-        for (byte i = 0; i < marcas.length; i++) {
-            if (marcaCheck.equals(marcas[i])) {
+    private boolean consistBrand(String brandCheck) {
+        for (byte i = 0; i < brandsList.length; i++) {
+            if (brandCheck.equals(brandsList[i])) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean consistirProcessador(String procesCheck) {
-        for (byte i = 0; i < processadores.length; i++) {
-            if (procesCheck.equals(processadores[i])) {
+    private boolean consistProcessor(String procesCheck) {
+        for (byte i = 0; i < processorsList.length; i++) {
+            if (procesCheck.equals(processorsList[i])) {
                 return true;
             }
         }
         return false;
     }
 
-    private boolean consistirTamanhoTela(int tTela) {
-        for (byte i = 0; i < tamanhoTelas.length; i++) {
-            if (tTela == tamanhoTelas[i]) {
+    private boolean consistScreenSize(int tTela) {
+        for (byte i = 0; i < screenSizeList.length; i++) {
+            if (tTela == screenSizeList[i]) {
                 return true;
             }
         }
@@ -56,19 +56,19 @@ public class Computador {
             RandomAccessFile computerFile = new RandomAccessFile("COMP.DAT", "rw");
             while (true) {
                 cursorLocation  = computerFile.getFilePointer();
-                ativo           = computerFile.readChar();
+                active          = computerFile.readChar();
                 codComp         = computerFile.readUTF();
-                marca           = computerFile.readUTF();
-                modelo          = computerFile.readUTF();
-                processador     = computerFile.readUTF();
-                quantMemoria    = computerFile.readInt();
-                tamanhoTela     = computerFile.readInt();
-                quantEstoque    = computerFile.readInt();
-                preco           = computerFile.readFloat();
-                quantVendida    = computerFile.readInt();
-                dtUltimaVenda   = computerFile.readUTF();
+                brand           = computerFile.readUTF();
+                model           = computerFile.readUTF();
+                processor       = computerFile.readUTF();
+                memorySize      = computerFile.readInt();
+                screenSize      = computerFile.readInt();
+                amountInStock   = computerFile.readInt();
+                price           = computerFile.readFloat();
+                totalSold       = computerFile.readInt();
+                dtLastSale      = computerFile.readUTF();
 
-                if (compSearch.equals(codComp) && ativo == 'S') {
+                if (compSearch.equals(codComp) && active == 'S') {
                     computerFile.close();
                     return cursorLocation;
                 }
@@ -88,20 +88,20 @@ public class Computador {
         try {
             RandomAccessFile computerFile = new RandomAccessFile("COMP.DAT", "rw");
             while (true) {
-                cursorLocation  = computerFile.getFilePointer();
-                ativo           = computerFile.readChar();
-                codComp         = computerFile.readUTF();
-                marca           = computerFile.readUTF();
-                modelo          = computerFile.readUTF();
-                processador     = computerFile.readUTF();
-                quantMemoria    = computerFile.readInt();
-                tamanhoTela     = computerFile.readInt();
-                quantEstoque    = computerFile.readInt();
-                preco           = computerFile.readFloat();
-                quantVendida    = computerFile.readInt();
-                dtUltimaVenda   = computerFile.readUTF();
+                cursorLocation   = computerFile.getFilePointer();
+                active           = computerFile.readChar();
+                codComp          = computerFile.readUTF();
+                brand            = computerFile.readUTF();
+                model            = computerFile.readUTF();
+                processor        = computerFile.readUTF();
+                memorySize       = computerFile.readInt();
+                screenSize       = computerFile.readInt();
+                amountInStock    = computerFile.readInt();
+                price            = computerFile.readFloat();
+                totalSold        = computerFile.readInt();
+                dtLastSale       = computerFile.readUTF();
 
-                if (compBrand.equals(codComp.substring(0, 2)) && ativo == 'S') {
+                if (compBrand.equals(codComp.substring(0, 2)) && active == 'S') {
                     lastOccurrence = codComp;
                 }
             }
@@ -119,16 +119,16 @@ public class Computador {
             RandomAccessFile computerFile = new RandomAccessFile("COMP.DAT", "rw");
 
             computerFile.seek(computerFile.length());
-            computerFile.writeChar(ativo);
+            computerFile.writeChar(active);
             computerFile.writeUTF(codComp);
-            computerFile.writeUTF(marca);
-            computerFile.writeUTF(modelo);
-            computerFile.writeUTF(processador);
-            computerFile.writeInt(quantMemoria);
-            computerFile.writeInt(quantEstoque);
-            computerFile.writeFloat(preco);
-            computerFile.writeInt(quantVendida);
-            computerFile.writeUTF(dtUltimaVenda);
+            computerFile.writeUTF(brand);
+            computerFile.writeUTF(model);
+            computerFile.writeUTF(processor);
+            computerFile.writeInt(memorySize);
+            computerFile.writeInt(amountInStock);
+            computerFile.writeFloat(price);
+            computerFile.writeInt(totalSold);
+            computerFile.writeUTF(dtLastSale);
             computerFile.close();
             System.out.println("Dados gravados com sucesso!\n");
         } catch (IOException e) {
@@ -153,69 +153,69 @@ public class Computador {
     public void addComp() {
         char confirmation;
         do {
-            System.out.print("Inserir marca: ");
-            marca = Main.readKB.next();
-            if (!consistirMarca(marca))
+            System.out.print("Inserir brand: ");
+            brand = Main.readKB.next();
+            if (!consistBrand(brand))
                 System.out.println("Marca invalida");
-        } while (!consistirMarca(marca));
+        } while (!consistBrand(brand));
 
         do {
-            System.out.print("Inserir modelo: ");
-            modelo = Main.readKB.next();
-            if (modelo.length() == 0)
+            System.out.print("Inserir model: ");
+            model = Main.readKB.next();
+            if (model.length() == 0)
                 System.out.println("Modelo deve ser digitado");
-        } while (modelo.length() == 0);
+        } while (model.length() == 0);
 
         do {
-            System.out.print("Inserir processador: ");
-            processador = Main.readKB.next();
-            if (!consistirProcessador(processador))
+            System.out.print("Inserir processor: ");
+            processor = Main.readKB.next();
+            if (!consistProcessor(processor))
                 System.out.println("Processador invalido");
-        } while (!consistirProcessador(processador));
+        } while (!consistProcessor(processor));
 
         do {
             System.out.print("Inserir quantidade de memoria: ");
-            quantMemoria = Main.readKB.nextInt();
-            if (quantMemoria < 1 || quantMemoria > 16)
+            memorySize = Main.readKB.nextInt();
+            if (memorySize < 1 || memorySize > 16)
                 System.out.println("Quantidade de memoria invalida");
-        } while (quantMemoria < 1 || quantMemoria > 16);
+        } while (memorySize < 1 || memorySize > 16);
 
         do {
             System.out.print("Inserir tamanho da tela: ");
-            tamanhoTela = Main.readKB.nextInt();
-            if (!consistirTamanhoTela(tamanhoTela))
+            screenSize = Main.readKB.nextInt();
+            if (!consistScreenSize(screenSize))
                 System.out.println("Tamanho de tela invalido");
-        } while (!consistirTamanhoTela(tamanhoTela));
+        } while (!consistScreenSize(screenSize));
 
         do {
             System.out.print("Quantidade em estoque: ");
-            quantEstoque = Main.readKB.nextInt();
-            if (quantEstoque < 0)
+            amountInStock = Main.readKB.nextInt();
+            if (amountInStock < 0)
                 System.out.println("Quantidade invalida");
-        } while (quantEstoque < 0);
+        } while (amountInStock < 0);
 
         do {
-            System.out.print("Inserir o preco: ");
-            preco = Main.readKB.nextFloat();
-            if (preco < 1000 || preco > 20000)
+            System.out.print("Inserir o price: ");
+            price = Main.readKB.nextFloat();
+            if (price < 1000 || price > 20000)
                 System.out.println("Preco invalido");
-        } while (preco < 1000 || preco > 20000);
+        } while (price < 1000 || price > 20000);
 
-        ativo = 'S';
-        quantVendida = 0;
-        dtUltimaVenda = "01/01/2000";
+        active = 'S';
+        totalSold = 0;
+        dtLastSale = "01/01/2000";
 
-        if (marca.equals("Dell")) {
+        if (brand.equals("Dell")) {
             codComp = generateCodComp("DE");
-        } else if (marca.equals("Lenovo")) {
+        } else if (brand.equals("Lenovo")) {
             codComp = generateCodComp("LE");
-        } else if (marca.equals("HP")) {
+        } else if (brand.equals("HP")) {
             codComp = generateCodComp("HP");
-        } else if (marca.equals("Positivo")) {
+        } else if (brand.equals("Positivo")) {
             codComp = generateCodComp("PO");
-        } else if (marca.equals("Asus")) {
+        } else if (brand.equals("Asus")) {
             codComp = generateCodComp("AS");
-        } else if (marca.equals("Apple")) {
+        } else if (brand.equals("Apple")) {
             codComp = generateCodComp("AP");
         } else {
             codComp = generateCodComp("IB");
@@ -269,16 +269,16 @@ public class Computador {
         if (regPos == -1) {
             System.out.println("Registro nao encontrado.");
         } else {
-            ativo = 'S';
+            active = 'S';
 
             do {
-                System.out.println("[1] Marca..................: " + marca);
-                System.out.println("[2] Modelo.................: " + modelo);
-                System.out.println("[3] Processador............: " + processador);
-                System.out.println("[4] Memoria................: " + quantMemoria + "gb");
-                System.out.println("[5] Tamanho da Tela........: " + tamanhoTela);
-                System.out.println("[6] Quantidade em estoque..: " + quantEstoque);
-                System.out.println("[7] Preco..................: " + preco);
+                System.out.println("[1] Marca..................: " + brand);
+                System.out.println("[2] Modelo.................: " + model);
+                System.out.println("[3] Processador............: " + processor);
+                System.out.println("[4] Memoria................: " + memorySize + "gb");
+                System.out.println("[5] Tamanho da Tela........: " + screenSize);
+                System.out.println("[6] Quantidade em estoque..: " + amountInStock);
+                System.out.println("[7] Preco..................: " + price);
 
                 System.out.println("Digite o numero do campo que deseja alterar (0 para finalizar): ");
                 option = Main.readKB.nextByte();
@@ -287,23 +287,23 @@ public class Computador {
                     case 1 -> {
                         do {
                             Main.readKB.nextLine();
-                            System.out.println("Digite a nova marca: ");
+                            System.out.println("Digite a nova brand: ");
                             tempStr = Main.readKB.next();
-                        } while (!consistirMarca(tempStr));
-                        marca = tempStr;
+                        } while (!consistBrand(tempStr));
+                        brand = tempStr;
                     }
                     case 2 -> {
                         Main.readKB.nextLine();
-                        System.out.println("Digite o novo modelo: ");
-                        modelo = Main.readKB.nextLine();
+                        System.out.println("Digite o novo model: ");
+                        model = Main.readKB.nextLine();
                     }
                     case 3 -> {
                         do {
                             Main.readKB.nextLine();
-                            System.out.println("Digite o novo processador: ");
+                            System.out.println("Digite o novo processor: ");
                             tempStr = Main.readKB.next();
-                        } while (!consistirProcessador(tempStr));
-                        processador = tempStr;
+                        } while (!consistProcessor(tempStr));
+                        processor = tempStr;
                     }
                     case 4 -> {
                         do {
@@ -311,15 +311,15 @@ public class Computador {
                             System.out.println("Digite a nova quantidade de memoria: ");
                             tempInt = Main.readKB.nextInt();
                         } while (tempInt < 1 || tempInt > 16);
-                        quantMemoria = tempInt;
+                        memorySize = tempInt;
                     }
                     case 5 -> {
                         do {
                             Main.readKB.nextLine();
                             System.out.println("Digite o novo tamanho de tela: ");
                             tempInt = Main.readKB.nextInt();
-                        } while (!consistirTamanhoTela(tempInt));
-                        tamanhoTela = tempInt;
+                        } while (!consistScreenSize(tempInt));
+                        screenSize = tempInt;
                     }
                     case 6 -> {
                         do {
@@ -327,15 +327,15 @@ public class Computador {
                             System.out.println("Digite a nova quantidade em estoque: ");
                             tempInt = Main.readKB.nextInt();
                         } while (tempInt < 0);
-                        quantEstoque = tempInt;
+                        amountInStock = tempInt;
                     }
                     case 7 -> {
                         do {
                             Main.readKB.nextLine();
-                            System.out.println("Digite o novo preco: ");
+                            System.out.println("Digite o novo price: ");
                             tempFlo = Main.readKB.nextFloat();
                         } while (tempFlo < 1000 || tempFlo > 20000);
-                        preco = tempFlo;
+                        price = tempFlo;
                     }
                     default -> System.out.println("Opcao invalida.");
                 }
@@ -351,5 +351,83 @@ public class Computador {
                 System.out.println("Alteracao descartada.");
             }
         }
+    }
+
+    public void deleteComputer () {
+        String searchComp;
+        char confirmation;
+        long regPos = 0;
+
+        System.out.println("Digite o codigo do computador que deseja excluir: ");
+        searchComp = Main.readKB.next();
+
+        regPos = searchComputer(searchComp);
+        if (regPos == -1) {
+            System.out.println("Computador nao cadastrado no arquivo\n");
+        } else {
+            System.out.println("Marca..................: " + brand);
+            System.out.println("Modelo.................: " + model);
+            System.out.println("Processador............: " + processor);
+            System.out.println("Quantidade de Memoria..: " + memorySize);
+            System.out.println("Tamanho da tela........: " + screenSize);
+            System.out.println();
+
+            System.out.println("\nConfirma a exclusao do computador (S/N)? ");
+            confirmation = Main.readKB.next().charAt(0);
+            if (confirmation == 'S') {
+                deactivateComputer(regPos);
+            } else {
+                System.out.println("Exclusao cancelada.");
+            }
+        }
+    }
+
+    public void query () {
+        RandomAccessFile computerFile;
+        byte option;
+        String searchComp;
+        long regPos;
+
+        do {
+            System.out.println("[1] Consultar apenas 1 computador:");
+            System.out.println("[2] Listar todos os computadores:");
+            System.out.println("[3] Listar computadores de determinada marca:");
+            System.out.println("[4] Listar computadores com determinado processador:");
+            System.out.println("[5] Listar computadores com determinado tamanho de tela:");
+            System.out.println("[0] Sair");
+
+            option = Main.readKB.nextByte();
+
+            switch (option) {
+                case 1 -> {
+                    Main.readKB.nextLine();
+                    System.out.println("Digite o codigo do computador:");
+                    searchComp = Main.readKB.next();
+                    regPos = searchComputer(searchComp);
+
+                    if (regPos == -1) {
+                        System.out.println("Computador nao cadastrado.");
+                    } else {
+                        //printComputer
+                    }
+                }
+                case 2 -> {
+
+                }
+                case 3 -> {
+
+                }
+                case 4 -> {
+
+                }
+                case 5 -> {
+
+                }
+                case 0 -> {
+                }
+                default -> System.out.println("Opcao invalida.");
+            }
+        } while (option != 0);
+
     }
 }
