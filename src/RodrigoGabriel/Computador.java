@@ -373,9 +373,14 @@ public class Computador {
 
                 switch (option) {
                     case 1 -> {
-                    	Main.readKB.nextLine();
-                        System.out.println("Digite o novo modelo: ");
-                        model = Main.readKB.nextLine();
+                    	do {
+                            Main.readKB.nextLine();
+                            System.out.println("Digite o novo modelo: ");
+                            model = Main.readKB.nextLine();
+
+                            if (model.length() == 0)
+                                System.out.println("Modelo precisa ser digitado.");
+                        } while (model.length() == 0);
                     }
                     case 2 -> {
                     	do {
@@ -691,7 +696,7 @@ public class Computador {
             amountSold = Main.readKB.nextInt();
             if (amountSold > amountInStock)
                 System.out.println("Quantidade nao disponivel em estoque.");
-        } while (amountSold > amountInStock);
+        } while (amountSold > amountInStock || amountSold <= 0);
 
         do {
             Main.readKB.nextLine();
