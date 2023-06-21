@@ -226,6 +226,7 @@ public class Computador {
     }
 
     private void computerVerification() {
+        System.out.println("Codigo.................: " + codComp);
         System.out.println("Marca..................: " + brand);
         System.out.println("Modelo.................: " + model);
         System.out.println("Processador............: " + processor);
