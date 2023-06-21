@@ -691,12 +691,16 @@ public class Computador {
             computerKey = Main.readKB.next();
         } while (searchComputer(computerKey) == -1);
 
+        computerVerification();
+
         do {
             Main.readKB.nextLine();
             System.out.println("Digite a quantidade vendida:");
             amountSold = Main.readKB.nextInt();
             if (amountSold > amountInStock)
                 System.out.println("Quantidade nao disponivel em estoque.");
+            if (amountSold <= 0)
+                System.out.println("Valor deve ser superior a 0");
         } while (amountSold > amountInStock || amountSold <= 0);
 
         do {
