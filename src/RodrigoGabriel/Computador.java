@@ -464,6 +464,8 @@ public class Computador {
         long regPos;
 
         do {
+            System.out.println();
+            System.out.println("----------------------CONSULTA----------------------");
             System.out.println("[1] Consultar apenas 1 computador:");
             System.out.println("[2] Listar todos os computadores:");
             System.out.println("[3] Listar computadores ja vendidos:");
