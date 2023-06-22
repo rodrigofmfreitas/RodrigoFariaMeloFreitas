@@ -333,7 +333,7 @@ public class Computador {
 
         computerVerification();
 
-        System.out.println("\nConfirma a gravacao dos dados (S/N)?");
+        System.out.println("Confirma a gravacao dos dados (S/N)?");
         confirmation = Main.readKB.next().charAt(0);
         if (confirmation == 'S' || confirmation == 's') {
             saveComputer();
@@ -453,7 +453,7 @@ public class Computador {
         } else {
             computerVerification();
 
-            System.out.println("\nConfirma a exclusao do computador (S/N)? ");
+            System.out.println("Confirma a exclusao do computador (S/N)? ");
             confirmation = Main.readKB.next().charAt(0);
             if (confirmation == 'S' || confirmation == 's') {
                 deactivateComputer(regPos);
@@ -470,7 +470,6 @@ public class Computador {
         long regPos;
 
         do {
-            System.out.println();
             System.out.println("----------------------CONSULTA----------------------");
             System.out.println("[1] Consultar apenas 1 computador:");
             System.out.println("[2] Listar todos os computadores:");
